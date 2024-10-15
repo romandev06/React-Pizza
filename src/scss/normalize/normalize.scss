@@ -1,0 +1,26 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul li {
+    list-style: none;
+}
+
+button {
+    border-radius: 4px;
+    background-color: transparent;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 9px 28px;
+    cursor: pointer;
+}

@@ -18,10 +18,10 @@ const sortData: SortDataType[] = [
 
 export default function Sort({ sortCurrentTitle, setCurrentSortTitle }) {
     const sortRef = useRef<HTMLButtonElement | null>(null)
-    const [activeSort, setActiveSort] = useState(0)
-    const [isOpen, setIsOpen] = useState(false)
+    const [activeSort, setActiveSort] = useState<number>(0)
+    const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    const handleClick = (i: number, item: SortDataType) => {
+    const handleClick = (i: number, item: SortDataType): void => {
         setIsOpen(!isOpen)
         setActiveSort(i)
         setCurrentSortTitle(item)
@@ -34,7 +34,7 @@ export default function Sort({ sortCurrentTitle, setCurrentSortTitle }) {
             }
         }
 
-        window.addEventListener('click', (e) => {
+        window.addEventListener('click', (e: MouseEvent): void => {
             closeSortMenu(e)
             // без очистки, ибо возникает непонятная ошибка (решу ее, если не забуду)
         })
@@ -48,7 +48,7 @@ export default function Sort({ sortCurrentTitle, setCurrentSortTitle }) {
             </button>
             {isOpen && (
                 <ul className='sort-list'>
-                    {sortData.map((item, i) =>
+                    {sortData.map((item: SortDataType, i: number) =>
                     <li onClick={() => handleClick(i, item)} key={i} className={i === activeSort ? 'sort-title__active' : ''}>
                         {item.sortName}
                     </li>)}
@@ -57,3 +57,7 @@ export default function Sort({ sortCurrentTitle, setCurrentSortTitle }) {
         </section>
     )
 }
+
+
+// В данном компоненте, если я работаю с window, то лучше использовать MouseEvent, а если просто с реакт элементами, то React.MouseEvent
+// Это обеспечит вам доступ к дополнительным свойствам и методам, специфичным для React 

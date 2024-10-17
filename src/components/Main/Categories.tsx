@@ -6,7 +6,7 @@ type CategoriesType = {
     category: number,
 }
 
-export default function Categories({ category }: CategoriesType) {
+export default function Categories({ category }: CategoriesType): React.ReactElement {
     const dispatch = useDispatch()
 
     const handleClick = (i: number): void => {
@@ -24,7 +24,7 @@ export default function Categories({ category }: CategoriesType) {
 
     return (
         <section className='categories-container'>
-            {categories.map((item, i) =>
+            {categories.map((item: string, i: number) =>
             <button key={i} onClick={() => handleClick(i)} className={category === i ? 'active-category' : ''}>
                 {item}
             </button>)}

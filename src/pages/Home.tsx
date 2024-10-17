@@ -42,14 +42,13 @@ export default function Home(): React.ReactElement {
 
 
 
-    /* 
 
 
-// вшитие параметров в url (работа с категориями и пагинацией)
+    // вшитие параметров в url (работа с категориями и пагинацией)
     useEffect(() => {
         if (window.location.search) {
             const parseString = qs.parse(window.location.search.substring(1))
-            dispatch(setSaveQuery({...parseString}))
+            dispatch(setSaveQuery({ ...parseString }))
         }
     }, [])
 
@@ -57,9 +56,6 @@ export default function Home(): React.ReactElement {
         const qsString = qs.stringify({ category, page })
         navigate(`?${qsString}`) // за счет useNavigate() мы делаем редирект на определенный адрес
     }, [category, page])
-
-
-*/
 
 
 

@@ -3,7 +3,7 @@ import HeaderSearch from './HeaderSearch'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-export default function Header() {
+export default function Header(): React.ReactElement {
     //@ts-ignore
     const { totalPrice, cartItems } = useSelector(state => state.cartReducer)
     const totalCount = cartItems.reduce((prev, current) => prev + current.count, 0)

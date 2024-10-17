@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function CartEmpty() {
+export default function CartEmpty(): React.ReactElement {
     return (
         <section className='cart-empty__section'>
             <h3>Корзина пустая </h3>

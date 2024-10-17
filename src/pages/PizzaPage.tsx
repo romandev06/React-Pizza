@@ -9,15 +9,19 @@ interface iCurrentPizza {
     price: number,
 }
 
-export default function PizzaPage() {
+export default function PizzaPage(): React.ReactElement {
     const navigate = useNavigate()
     const { id } = useParams()
 
     const [currentPizza, setCurrentPizza] = useState<iCurrentPizza>()
 
     const getCurrentPizza = async() => {
-        const { data } = await axios.get(`https://66f020caf2a8bce81be515f6.mockapi.io/react-pizza/${id}`)
-        setCurrentPizza(data)
+        try {
+            const { data } = await axios.get(`https://66f020caf2a8bce81be515f6.mockapi.io/react-pizza/${id}`)
+            setCurrentPizza(data)
+        } catch(err) {
+            return <h2>Ошибка пицц</h2>  // createAsyncThunk юзнуть для статуса проблемы
+        }
     }
 
     useEffect(() => {

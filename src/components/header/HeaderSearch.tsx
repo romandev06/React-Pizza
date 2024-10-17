@@ -13,7 +13,6 @@ export default function HeaderSearch(): React.ReactElement {
 
     const clearInput: React.MouseEventHandler = (event: React.MouseEvent<SVGSVGElement>) => {
         dispatch(setInputValue(''))
-        console.log(event, 'haha')
     }
 
     return (

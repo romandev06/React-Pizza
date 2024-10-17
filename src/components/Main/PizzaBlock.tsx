@@ -15,7 +15,7 @@ export type PizzaBlockType = {
 }
 
 
-export default function PizzaBlock({ id, image, title, price, category, rating, sizes, types }: PizzaBlockType)/*: React.ReactElement<PizzaBlockType> */ {
+export default function PizzaBlock({ id, image, title, price, category, rating, sizes, types }: PizzaBlockType): React.ReactElement {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -47,12 +47,12 @@ export default function PizzaBlock({ id, image, title, price, category, rating, 
             <p className='pizza-title'>{title}</p>
             <div className='sizes-types-wrapper'>
                 <div className='pizza-types'>
-                    {types.map((item, i) => <p onClick={() => setActiveType(i)} className={i === activeType ? 'pizza-types__text-active' : 'pizza-types__text'} key={i}>
+                    {types.map((item: number, i: number) => <p onClick={() => setActiveType(i)} className={i === activeType ? 'pizza-types__text-active' : 'pizza-types__text'} key={i}>
                         {typeNames[item]}
                     </p>)}
                 </div>
                 <div className='pizza-sizes'>
-                    {sizes.map((item, i) => <p onClick={() => setActiveSize(i)} className={i === activeSize ? 'pizza-sizes__text-active' : 'pizza-sizes__text'} key={i}>
+                    {sizes.map((item: number, i: number) => <p onClick={() => setActiveSize(i)} className={i === activeSize ? 'pizza-sizes__text-active' : 'pizza-sizes__text'} key={i}>
                         {sizeNames[item]} см.
                     </p>)}
                 </div>

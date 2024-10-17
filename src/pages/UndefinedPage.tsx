@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function UndefinedPage() {
+export default function UndefinedPage(): React.ReactElement {
     const navigate = useNavigate()
 
     return (

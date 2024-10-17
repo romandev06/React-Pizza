@@ -2,7 +2,11 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { setPage } from '../redux/slices/filterSlice'
 
-export default function Pagination({ page }) {
+type PaginationType = {
+    page: number,
+}
+
+export default function Pagination({ page }: PaginationType) {
     const dispatch = useDispatch()
 
     return (

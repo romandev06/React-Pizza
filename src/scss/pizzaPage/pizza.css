@@ -45,3 +45,8 @@
     font-size: 14px;
   }
 }
+
+.current-pizza__loading {
+  text-align: center;
+  padding-top: 35px;
+}

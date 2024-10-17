@@ -13,7 +13,7 @@ export default function PizzaPage() {
     const navigate = useNavigate()
     const { id } = useParams()
 
-    const [currentPizza, setCurrentPizza] = useState<iCurrentPizza>({ image: '', title: '', rating: 0, price: 0 }) // значения по умолчанию
+    const [currentPizza, setCurrentPizza] = useState<iCurrentPizza>()
 
     const getCurrentPizza = async() => {
         const { data } = await axios.get(`https://66f020caf2a8bce81be515f6.mockapi.io/react-pizza/${id}`)
@@ -23,6 +23,10 @@ export default function PizzaPage() {
     useEffect(() => {
         getCurrentPizza()
     }, [])
+
+    if (!currentPizza) {
+        return <h2 className='current-pizza__loading'>Загрузка...</h2>
+    }
 
     return (
         <section className='current-pizza__section'>

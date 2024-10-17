@@ -1,10 +1,24 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { addItem, deleteAllItems, deleteCurrentItem, minusItem } from '../../redux/slices/cartSlice'
 
-export default function Cart() {
+
+export interface ICartItem {
+    id: string,
+    image: string,
+    title: string,
+    price: number,
+    category: number,
+    size: number,
+    type: number,
+    count: number
+}
+
+
+export default function Cart(): React.ReactElement {
     const dispatch = useDispatch()
+    //@ts-ignore
     const { totalPrice, cartItems } = useSelector(state => state.cartReducer)
     const navigate = useNavigate()
 
@@ -30,7 +44,7 @@ export default function Cart() {
             </section>
 
             <section className='pizza-cart__section'>
-                {cartItems.map((item, i) => 
+                {cartItems.map((item: ICartItem, i: number) => 
                     <div key={i} className='pizza-cart__values'>
                         <div className='pizza-cart__properties'>
                             <img width={80} height={80} src={item.image} alt="pizza image" />

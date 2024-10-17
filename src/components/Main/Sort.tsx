@@ -1,28 +1,35 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const sortData = [
+
+export type SortDataType = {
+    sortName: string,
+    sortPropertyName: string,
+}
+
+const sortData: SortDataType[] = [
     { sortName: 'Популярности (по возрастанию)', sortPropertyName: 'rating', },
     { sortName: 'Популярности (по убыванию)', sortPropertyName: '-rating', },
     { sortName: 'Цене (по возрастанию)', sortPropertyName: 'price', },
     { sortName: 'Цене (по убыванию)', sortPropertyName: '-price', },
     { sortName: 'По Размерам', sortPropertyName: '-sizes', },
-    { sortName: 'Типам', sortPropertyName: '-types', },
+    { sortName: 'Типам', sortPropertyName: '-types', }
 ]
 
+
 export default function Sort({ sortCurrentTitle, setCurrentSortTitle }) {
-    const sortRef = useRef()
+    const sortRef = useRef<HTMLButtonElement | null>(null)
     const [activeSort, setActiveSort] = useState(0)
     const [isOpen, setIsOpen] = useState(false)
 
-    const handleClick = (i, item) => {
+    const handleClick = (i: number, item: SortDataType) => {
         setIsOpen(!isOpen)
         setActiveSort(i)
         setCurrentSortTitle(item)
     }
 
     useEffect(() => {
-        const closeSortMenu = (e) => {
-            if (sortRef.current && !sortRef.current.contains(e.target)) {
+        const closeSortMenu = (e: MouseEvent) => {
+            if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
                 setIsOpen(false)
             }
         }

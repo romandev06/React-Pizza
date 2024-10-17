@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Categories from '../components/Main/Categories'
-import Sort from '../components/Main/Sort'
+import Sort, { SortDataType } from '../components/Main/Sort'
 
 import { PizzaSkeleton } from '../components/Main/PizzaSkeleton'
-import PizzaBlock from '../components/Main/PizzaBlock'
+import PizzaBlock, { PizzaBlockType } from '../components/Main/PizzaBlock'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPizzasData } from '../redux/slices/pizzaItemsSlice'
@@ -16,19 +16,23 @@ import { useNavigate } from 'react-router-dom'
 import { setSaveQuery } from '../redux/slices/filterSlice'
 
 
-export default function Home() {
+export default function Home(): React.ReactElement {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    //@ts-ignore
     const { pizzaItems, status } = useSelector(state => state.itemsReducer)
+    //@ts-ignore
     const { category, page } = useSelector(state => state.filterReducer)
+    //@ts-ignore
     const { inputValue } = useSelector(state => state.filterReducer)
 
-    const [sortCurrentTitle, setCurrentSortTitle] = useState({ sortName: 'Популярности (по возрастанию)', sortPropertyName: 'rating', })
+    const [sortCurrentTitle, setCurrentSortTitle] = useState<SortDataType>({ sortName: 'Популярности (по возрастанию)', sortPropertyName: 'rating', })
 
 
 
 
     const fetchPizzas = () => {
+        //@ts-ignore
         dispatch(fetchPizzasData({ page, category, sortCurrentTitle }))
     }
 
@@ -72,8 +76,8 @@ export default function Home() {
             )}
             {status === 'success' && (
                 <section className='container pizza-wrapper'>
-                    {pizzaItems.filter(item => item.title.toLowerCase().includes(inputValue.toLowerCase()))
-                    .map(item => <PizzaBlock key={item.id} {...item} />)}
+                    {pizzaItems.filter((item: PizzaBlockType) => item.title.toLowerCase().includes(inputValue.toLowerCase()))
+                    .map((item: PizzaBlockType) => <PizzaBlock key={item.id} {...item} />)}
                 </section>
             )}
             {status === 'empty' && (

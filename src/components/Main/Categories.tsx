@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { setCategory } from '../../redux/slices/filterSlice'
 import { useDispatch } from 'react-redux'
 
-export default function Categories({ category }) {
+type CategoriesType = {
+    category: number,
+}
+
+export default function Categories({ category }: CategoriesType) {
     const dispatch = useDispatch()
 
-    const handleClick = (i) => {
+    const handleClick = (i: number): void => {
         dispatch(setCategory(i))
     }
 
-    const categories = [
+    const categories: string[] = [
         'Все',
         'Мясные',
         'Вегетарианская',

@@ -1,6 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-const initialState = {
+
+export type CartItem = {
+    id: string,
+    image: string,
+    title: string,
+    price: number,
+    size: string,
+    type: string,
+    count: number,
+}
+
+interface IInitialCartState {
+    totalPrice: number,
+    cartItems: CartItem[],
+}
+
+// обычно для initialState юзают interface
+// inteface только для обьектов, в отличие от type
+const initialState: IInitialCartState = {
     totalPrice: 0,
     cartItems: [],
 }
@@ -11,7 +29,7 @@ const cartSlice = createSlice({
     name: 'cart',
 
     reducers: {
-        addItem(state, action) {
+        addItem(state, action: PayloadAction<CartItem>) {
             const currentObject = state.cartItems.find(item => item.id === action.payload.id)
             if (currentObject) {
                 currentObject.count++
@@ -20,7 +38,7 @@ const cartSlice = createSlice({
             }
             state.totalPrice = state.cartItems.reduce((prev, current) => prev + (current.price * current.count), 0)
         },
-        minusItem(state, action) {
+        minusItem(state, action: PayloadAction<CartItem>) {
             const currentObject = state.cartItems.find(item => item.id === action.payload.id)
             if (currentObject) {
                 currentObject.count--
@@ -36,7 +54,7 @@ const cartSlice = createSlice({
                 state.totalPrice = 0
             }
         },
-        deleteCurrentItem(state, action) {
+        deleteCurrentItem(state, action: PayloadAction<CartItem>) {
             const currentObject = state.cartItems.find(item => item.id === action.payload.id)
             if (window.confirm('Вы точно хотите удалить данную пиицу ?(')) {
                 if (currentObject) {

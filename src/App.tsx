@@ -52,3 +52,7 @@ export default App
 
 // но при работе с React.ReactElement не работае подсказка при наведении (не показывает какой параметр какой тип)
 // хотя с React.FC все работает
+
+
+
+// ПЕРВЫМ ДЕЛОМ СДЕЛАТЬ createasyncthunk в проект на PizzaPage.tsx

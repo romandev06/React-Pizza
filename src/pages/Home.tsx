@@ -14,17 +14,18 @@ import Pagination from '../components/Pagination'
 import qs from 'qs'
 import { useNavigate } from 'react-router-dom'
 import { setSaveQuery } from '../redux/slices/filterSlice'
+import { RootState } from '../redux/store'
 
 
 export default function Home(): React.ReactElement {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    //@ts-ignore
-    const { pizzaItems, status } = useSelector(state => state.itemsReducer)
-    //@ts-ignore
-    const { category, page } = useSelector(state => state.filterReducer)
-    //@ts-ignore
-    const { inputValue } = useSelector(state => state.filterReducer)
+
+    const { pizzaItems, status } = useSelector((state: RootState) => state.itemsReducer)
+
+    const { category, page } = useSelector((state: RootState) => state.filterReducer)
+
+    const { inputValue } = useSelector((state: RootState) => state.filterReducer)
 
     const [sortCurrentTitle, setCurrentSortTitle] = useState<SortDataType>({ sortName: 'Популярности (по возрастанию)', sortPropertyName: 'rating', })
 
@@ -33,7 +34,7 @@ export default function Home(): React.ReactElement {
 
     const fetchPizzas = () => {
         //@ts-ignore
-        dispatch(fetchPizzasData({ page, category, sortCurrentTitle }))
+        dispatch(fetchPizzasData({ page, category, sortTitle: sortCurrentTitle.sortPropertyName }))
     }
 
     useEffect(() => {

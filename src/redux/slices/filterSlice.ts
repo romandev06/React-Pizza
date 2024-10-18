@@ -1,13 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+
+
+interface IInitialFilterState {
+    category: number,
+    page: number,
+    inputValue: string,
+}
 
 
 
-const initialState = {
+const initialState: IInitialFilterState = {
     category: 0,
     page: 1,
     inputValue: '',
 }
-
 
 
 const filterSlice = createSlice({
@@ -15,17 +21,17 @@ const filterSlice = createSlice({
     name: 'items',
 
     reducers: {
-        setPage(state, action) {
+        setPage(state, action: PayloadAction<number>) {
             state.page = action.payload
         },
-        setCategory(state, action) {
+        setCategory(state, action: PayloadAction<number>) {
             state.category = action.payload
         },
-        setSaveQuery(state, action) {
+        setSaveQuery(state, action: PayloadAction<IInitialFilterState>) {
             state.category = Number(action.payload.category)
             state.page = Number(action.payload.page)
         },
-        setInputValue(state, action) {
+        setInputValue(state, action: PayloadAction<string>) {
             state.inputValue = action.payload
         }
     },

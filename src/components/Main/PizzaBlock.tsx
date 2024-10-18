@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem } from '../../redux/slices/cartSlice'
+import { addItem, CartItem } from '../../redux/slices/cartSlice'
 import { useNavigate } from 'react-router-dom'
+import { RootState } from '../../redux/store'
 
 export type PizzaBlockType = {
     id: string,
@@ -11,7 +12,7 @@ export type PizzaBlockType = {
     category: number,
     rating: number,
     sizes: number[],
-    types: number[]
+    types: number[],
 }
 
 
@@ -19,8 +20,8 @@ export default function PizzaBlock({ id, image, title, price, category, rating, 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    //@ts-ignore
-    const getCartItemCount = useSelector(state => state.cartReducer.cartItems.find(item => item.id === id))
+
+    const getCartItemCount = useSelector((state: RootState) => state.cartReducer.cartItems.find(item => item.id === id))
 
     const currentItemCount = getCartItemCount ? getCartItemCount.count : 0
 
@@ -33,7 +34,7 @@ export default function PizzaBlock({ id, image, title, price, category, rating, 
 
     const addItemToCart = () => {
         const cartItemData = {
-            id, image, title, price, size: sizeNames[activeSize], type: typeNames[activeType]
+            id, image, title, price, size: sizeNames[activeSize], type: typeNames[activeType], count: 0,
         }
 
         dispatch(addItem(cartItemData))
